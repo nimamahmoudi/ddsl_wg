@@ -1,0 +1,15 @@
+language: python
+python:
+- '3.6'
+install:
+- pip install -r requirements.txt
+- pip install .
+script:
+- echo "NOTHING FOR NOW, BUT WILL ADD TEST SCRIPTS"
+deploy:
+  provider: pypi
+  user: nima_mahmoudi
+  distributions: sdist bdist_wheel
+  skip_existing: true
+  password:
+    secure: Er0g8HUIrzMnYPnAvg99Bv29c1b/ByrP3Ox8sJDge/OMr5J5oVoti+XxU66McC61wkVNAiHirx2pI2njp5afz9eiU8VS+6D19ZLhTK3FOBRdkUi+PsMacPVlGIYnNy8f1/SMwiLGqJMFohKIOiKpTsdFr3NdQ56fSqeZ9BUEEDG8yxQ7Bm1ga/DsHwCOz/kdAI5/J46KbydkxBKCnFUN2dqtR2rz3h8eh8pUZNb99EBUz340YB81PSyoBZ/j+5s6fCFXAPXoFVlgwqml9q8Iob/p7qpaYexoQycH+Wg3A+57buU+Opy7bnrKw47RIBQssgT3uYtSgria0p0AdUKL6spHsCjUGVhvN576gpcbkr5D/EcuwwaGuCOst4RHBLKDZ3qaImnsVeifHhrvyreGUChgxf3OGjDPUC53Y9GqIZswgqPWr0q70B9YUZP5NA5He/BCw+qKA2ofMn4OKhidsNfno68omU6fivZ7hh4rH4972YR/wxpfR2en7NY6nMGvx6TpEmVqKjGu2KvK/MEJAHOnStiPIinHnTKXjVOEwM6n4wFmxMyYrmZd0uY1JpiOnlgHAxZDZou9+EhfQ8/34B57FOqnnj1G1at15HcoDX/P4z16zGx2ENqFBCwet0zsEnLt4iiDFUWy/HGxHSkfWQ4ero4YbnLdDLHy0lTujRA=
