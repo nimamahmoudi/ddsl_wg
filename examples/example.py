@@ -84,6 +84,7 @@ def worker_func():
         'aws_duration': aws_duration,
         'aws_billed_duration': aws_billed_duration,
         'aws_max_mem': aws_max_mem,
+        'io_speed': r_parsed['io'][0]['speed']
     }
     return ret_val
 
