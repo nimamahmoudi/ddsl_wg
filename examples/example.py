@@ -5,7 +5,6 @@
 
 #%%
 # Eveything we need to make a request to a lambda function
-# Gets default user
 import json
 import boto3
 import pprint
