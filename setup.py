@@ -21,7 +21,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=['numpy>=1.16.4', 'boto3>=1.9.170', 'pandas>=0.24.2'],
     classifiers=[
-        'Development Status :: 3 - Beta',
+        'Development Status :: 4 - Beta',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
