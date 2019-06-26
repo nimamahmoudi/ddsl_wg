@@ -1,7 +1,7 @@
 import queue
 import time
 import threading
-from ddsl_lambda_wg.timer import *
+from ddsl_wg.timer import *
 
 import numpy as np
 def get_random_wait_time(rps):
