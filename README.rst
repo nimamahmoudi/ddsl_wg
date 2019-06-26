@@ -35,6 +35,6 @@ Upgrading:
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/ddsl-wg.svg
 .. |PyPI - Status| image:: https://img.shields.io/pypi/status/ddsl-wg.svg
-.. |Travis (.com)| image:: https://img.shields.io/travis/com/nimamahmoudi/ddsl_wg.svg
+.. |Travis (.com)| image:: https://img.shields.io/travis/com/nimamahmoudi/ddsl_lambda_workload_generator.svg
 .. |Libraries.io dependency status for latest release| image:: https://img.shields.io/librariesio/release/pypi/ddsl-wg.svg
 .. |GitHub| image:: https://img.shields.io/github/license/nimamahmoudi/ddsl_wg.svg
