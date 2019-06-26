@@ -41,6 +41,8 @@ class DDSLWG:
         self.worker_thread_count = worker_thread_count
         self.worker_func = worker_func
         self.q = queue.Queue()
+        self.fire_timer = TimerClass()
+        self.prepare_test()
 
         if delay_func is None:
             self.delay_func = get_random_wait_time
@@ -62,7 +64,6 @@ class DDSLWG:
         return True
 
     def prepare_test(self):
-        self.fire_timer = TimerClass()
         self.fire_timer.tic()
 
     def fire_wait(self):
