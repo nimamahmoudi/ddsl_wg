@@ -9,6 +9,7 @@ import json
 import boto3
 import pprint
 import os
+import time
 from botocore.exceptions import ClientError
 # This automatically loads the logged in aws session info in ~/.aws
 client = boto3.client('lambda', region_name='us-east-1')
@@ -32,12 +33,14 @@ def worker_func():
 
     b_payload = json.dumps(payload).encode()
 
+    client_start_time = time.time()
     response = client.invoke(
         FunctionName=func_name,
         InvocationType='RequestResponse',
         LogType='Tail',
         Payload=b_payload,
     )
+    client_end_time = time.time()
 
     # This is how we get the payload
     r = response['Payload'].read().decode('unicode_escape')
@@ -67,7 +70,7 @@ def worker_func():
                     # print('Max Memory Used: %.2f MB' % aws_max_mem)
 
     ret_val = {
-        'is_new': r_parsed['stat']['exist_id'] == r_parsed['stat']['new_id'],
+        'is_cold': r_parsed['stat']['exist_id'] == r_parsed['stat']['new_id'],
         'cpu_info': r_parsed['stat']['cpu_info'],
         'inst_id': r_parsed['stat']['inst_id'],
         'inst_priv_ip': r_parsed['stat']['inst_priv_ip'],
@@ -83,7 +86,10 @@ def worker_func():
         'aws_duration': aws_duration,
         'aws_billed_duration': aws_billed_duration,
         'aws_max_mem': aws_max_mem,
-        'io_speed': r_parsed['io'][0]['speed']
+        'io_speed': r_parsed['io'][0]['speed'],
+        'client_start_time': client_start_time,
+        'client_end_time': client_end_time,
+        'client_elapsed_time': client_end_time - client_start_time,
     }
     return ret_val
 
@@ -102,10 +108,30 @@ pd.DataFrame(data=all_res)
 #%% 
 # Testing simple functionality
 from ddsl_lambda_wg.timer import *
-import ddsl_lambda_wg as wg
+import ddsl_lambda_wg as dwg
+
+def worker_func2():
+    return {
+        'time': time.time()
+    }
+
+wg = dwg.DdslLambdaWG(worker_func=worker_func, rps=10/60, worker_thread_count=100)
+wg.start_workers()
+
 
 timer = TimerClass()
+
+
+# for one minute, test it out
 timer.tic()
 
+wg.prepare_test()
+while timer.toc() < 5*60:
+    wg.fire_wait()
 
+wg.stop_workers()
 
+all_res = wg.get_stats()
+
+print(len(all_res))
+# pd.DataFrame(data=all_res)

@@ -1,4 +1,9 @@
 import time
+
+seconds_per_unit = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800}
+def get_time_in_secs(s):
+    return int(s[:-1]) * seconds_per_unit[s[-1]]
+
 class TimerClass:
     def __init__(self):
         self.start_time = time.time()
