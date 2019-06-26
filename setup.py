@@ -19,7 +19,7 @@ setuptools.setup(
     description="This is a workload generator for aws lambda.",
     long_description=open('README.rst').read(),
     packages=setuptools.find_packages(),
-    install_requires=['numpy'],
+    install_requires=['numpy>=1.16.4', 'boto3>=1.9.170', 'pandas>=0.24.2'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',

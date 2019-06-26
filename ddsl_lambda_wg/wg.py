@@ -32,7 +32,7 @@ class WorkerThread(threading.Thread):
                 continue
 
 class DdslLambdaWG:
-    def __init__(self, worker_func, rps=10/60, worker_thread_count=10, *args, **kwargs):
+    def __init__(self, worker_func, rps=10/60, delay_func=None, worker_thread_count=10, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.rps = rps
@@ -41,6 +41,11 @@ class DdslLambdaWG:
         self.worker_thread_count = worker_thread_count
         self.worker_func = worker_func
         self.q = queue.Queue()
+
+        if delay_func is None:
+            self.delay_func = get_random_wait_time
+        else:
+            self.delay_func = delay_func
 
     def get_stats(self):
         return self.temp_stats
@@ -61,7 +66,7 @@ class DdslLambdaWG:
         self.fire_timer.tic()
 
     def fire_wait(self):
-        wait_time = get_random_wait_time(self.rps) - self.fire_timer.toc()
+        wait_time = self.delay_func(self.rps) - self.fire_timer.toc()
         if wait_time > 0:
             time.sleep(wait_time)
 

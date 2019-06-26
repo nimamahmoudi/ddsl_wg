@@ -1,7 +1,7 @@
 #%%
-# Just for Jupyter notebook functionality
-%load_ext autoreload
-%autoreload 2
+# Just for Jupyter notebook functionality, works best with VSCode Jupyter Extension
+# %load_ext autoreload
+# %autoreload 2
 
 #%%
 # Eveything we need to make a request to a lambda function
@@ -118,15 +118,12 @@ def worker_func2():
 wg = dwg.DdslLambdaWG(worker_func=worker_func, rps=10/60, worker_thread_count=100)
 wg.start_workers()
 
-
 timer = TimerClass()
-
-
 # for one minute, test it out
 timer.tic()
 
 wg.prepare_test()
-while timer.toc() < 5*60:
+while timer.toc() < 60:
     wg.fire_wait()
 
 wg.stop_workers()
@@ -135,3 +132,23 @@ all_res = wg.get_stats()
 
 print(len(all_res))
 # pd.DataFrame(data=all_res)
+
+#%%
+# And this is the way to imlement custom delay function if needed
+wg = dwg.DdslLambdaWG(worker_func=worker_func, delay_func=lambda x: 1/x, 
+                        rps=10/60, worker_thread_count=100)
+wg.start_workers()
+
+timer = TimerClass()
+# for one minute, test it out
+timer.tic()
+
+wg.prepare_test()
+while timer.toc() < 63:
+    wg.fire_wait()
+
+wg.stop_workers()
+
+all_res = wg.get_stats()
+
+print(len(all_res))
