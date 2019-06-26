@@ -1,5 +1,5 @@
-from ddsl_lambda_wg.wg import *
-import ddsl_lambda_wg.timer as timer
+from ddsl_wg.wg import *
+import ddsl_wg.timer as timer
 
 __version__ = '0.1.5'
 

@@ -107,15 +107,15 @@ pd.DataFrame(data=all_res)
 
 #%% 
 # Testing simple functionality
-from ddsl_lambda_wg.timer import *
-import ddsl_lambda_wg as dwg
+from ddsl_wg.timer import *
+import ddsl_wg as dwg
 
 def worker_func2():
     return {
         'time': time.time()
     }
 
-wg = dwg.DdslLambdaWG(worker_func=worker_func, rps=10/60, worker_thread_count=100)
+wg = dwg.DDSLWG(worker_func=worker_func, rps=10/60, worker_thread_count=100)
 wg.start_workers()
 
 timer = TimerClass()
@@ -135,7 +135,7 @@ print(len(all_res))
 
 #%%
 # And this is the way to imlement custom delay function if needed
-wg = dwg.DdslLambdaWG(worker_func=worker_func, delay_func=lambda x: 1/x, 
+wg = dwg.DDSLWG(worker_func=worker_func, delay_func=lambda x: 1/x, 
                         rps=10/60, worker_thread_count=100)
 wg.start_workers()
 

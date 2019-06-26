@@ -31,7 +31,7 @@ class WorkerThread(threading.Thread):
                 time.sleep(.01)
                 continue
 
-class DdslLambdaWG:
+class DDSLWG:
     def __init__(self, worker_func, rps=10/60, delay_func=None, worker_thread_count=10, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
