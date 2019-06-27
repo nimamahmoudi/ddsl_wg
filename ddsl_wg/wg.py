@@ -60,6 +60,8 @@ class DDSLWG:
         return True
     
     def set_rps(self, new_rps):
+        if new_rps < 1/60:
+            new_rps = 1/60
         self.rps = new_rps
         return True
 
