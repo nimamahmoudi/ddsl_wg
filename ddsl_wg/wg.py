@@ -69,12 +69,11 @@ class DDSLWG:
         self.fire_timer.tic()
 
     def fire_wait(self):
+        self.fire_timer.tic()
+        self.fire()
         wait_time = self.delay_func(self.rps) - self.fire_timer.toc()
         if wait_time > 0:
             time.sleep(wait_time)
-
-        self.fire_timer.tic()
-        self.fire()
 
     def stop_workers(self):
         if self.worker_threads is not None:

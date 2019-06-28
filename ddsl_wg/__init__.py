@@ -1,7 +1,7 @@
 from ddsl_wg.wg import *
 import ddsl_wg.timer as timer
 
-__version__ = '0.1.9'
+__version__ = '0.1.10'
 
 __author__ = 'Nima Mahmoudi <nima_mahmoudi@live.com>'
 
